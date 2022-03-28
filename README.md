@@ -18,6 +18,12 @@ Los pasos son los siguientes:
 
 1. Descargar la base de datos de la página de Kaggle.
 2. Descomprimir en una carpeta en la computadora.
+Las los siguientes directorios y archivos deben quedar en una misma carpeta
+- mask_weared_incorrect
+- without_mask
+- with_mask
+- image_preprocessing.py
+
 3. Ejecutar el *script* image_preprocessing.py. Este *script* genererá un objeto del tipo PKL, el cual ya tiene separadas los datos en entrenamiento y prueba. Si desea modificar el porcentaje de imágenes de entrenamiento se necesita modificar este *script*.
 4. Leer las imágenes es muy sencillo, simplemente ejecute el siguiente código en su rutina.
 
@@ -26,3 +32,6 @@ import joblib
 
 train_images, test_images, train_labels, test_labels = joblib.load("facemask_dataset.pkl")
 ```
+
+
+
