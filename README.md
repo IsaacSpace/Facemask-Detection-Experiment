@@ -26,12 +26,34 @@ Las los siguientes directorios y archivos deben quedar en una misma carpeta
 
 3. Ejecutar el *script* image_preprocessing.py. Este *script* genererá un objeto del tipo PKL, el cual ya tiene separadas los datos en entrenamiento y prueba. Si desea modificar el porcentaje de imágenes de entrenamiento se necesita modificar este *script*.
 4. Leer las imágenes es muy sencillo, simplemente ejecute el siguiente código en su rutina.
-
 ```python
-import joblib 
+import joblib
 
-train_images, test_images, train_labels, test_labels = joblib.load("facemask_dataset.pkl")
+train_data, test_data, train_labels, test_labels = joblib.load("facemask_dataset.pkl")
 ```
 
 
+A continuación se muestra un código base para el análisis de esta base de datos.
+
+```python
+import joblib
+import numpy
+from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
+from keras.models import Sequential
+from keras.utils import to_categorical
+import matplotlib.pyplot as plt
+import random
+
+train_data, test_data, train_labels, test_labels = joblib.load("facemask_dataset.pkl")
+
+network = Sequential()
+network.add(Conv2D(filters = 64, kernel_size=2, input_shape=(128,128,3)))
+network.add(MaxPool2D(pool_size=(2,2)))
+network.add(Flatten())
+network.add(Dense(units = 500, activation="relu"))
+network.add(Dense(units = 3, activation="softmax"))
+network.summary()
+network.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
+network.fit(x=train_data, y=train_labels, batch_size=128, epochs=10)
+```
 
