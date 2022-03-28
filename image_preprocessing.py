@@ -1,4 +1,3 @@
-from tkinter import Y
 import numpy 
 import joblib
 import matplotlib.image as img
